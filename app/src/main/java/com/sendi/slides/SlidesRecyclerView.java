@@ -25,11 +25,9 @@ public class SlidesRecyclerView extends RecyclerView {
     private ImageView deleteView;
     private SlidesAdapter.SlidesViewHolder mViewHolder;
     private STATES states = STATES.CLOSE;//默认是关闭的
-    private int position;
     private int deleteViewWidth;//功能View的宽度
     private int mLastX;
     private int mLastY;
-    private OnDeleteListener mDeleteListener;
 
     enum STATES {
         CLOSE,
@@ -53,9 +51,6 @@ public class SlidesRecyclerView extends RecyclerView {
         mScroller = new Scroller(context);
     }
 
-    public void setDeleteListener(OnDeleteListener deleteListener) {
-        this.mDeleteListener = deleteListener;
-    }
 
     @Override
     public void computeScroll() {
@@ -89,20 +84,11 @@ public class SlidesRecyclerView extends RecyclerView {
                 if (states == STATES.CLOSE) {//处于关闭状态
                     View view = this.findChildViewUnder(startX, startY);
                     mViewHolder = (SlidesAdapter.SlidesViewHolder) this.findContainingViewHolder(view);
-                    position = mViewHolder.getAdapterPosition();
 
-                    mItemView = mViewHolder.llContent;
-                    deleteView = mViewHolder.ivFun;
+                    mItemView = mViewHolder.ContentView;
+                    deleteView = mViewHolder.deleteView;
                     deleteViewWidth = deleteView.getWidth();//获取侧滑出的功能图片的宽
 
-                    deleteView.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {//给删除图标注册点击监听
-                            if (mDeleteListener != null) {
-                                mDeleteListener.onDelete(position);
-                            }
-                        }
-                    });
                 } else if (states == STATES.OPEN) {//处于打开状态
                     mScroller.startScroll(mItemView.getScrollX(), 0, -deleteViewWidth, 0);//滑动到关闭
                     deleteView.setVisibility(INVISIBLE);
@@ -181,8 +167,4 @@ public class SlidesRecyclerView extends RecyclerView {
         return super.onTouchEvent(e);
     }
 
-
-    interface OnDeleteListener {
-        void onDelete(int position);
-    }
 }

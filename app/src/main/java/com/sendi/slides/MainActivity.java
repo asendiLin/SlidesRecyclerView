@@ -2,8 +2,10 @@ package com.sendi.slides;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.widget.Toast;
+import android.util.Log;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,13 +19,17 @@ public class MainActivity extends AppCompatActivity {
         mSlidesAdapter=new SlidesAdapter(this);
         LinearLayoutManager manager=new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(manager);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(mSlidesAdapter);
 
-        mRecyclerView.setDeleteListener(new SlidesRecyclerView.OnDeleteListener() {
+        mSlidesAdapter.setDeleteListener(new SlidesAdapter.OnDeleteListener() {
             @Override
-            public void onDelete(int position) {
-                Toast.makeText(MainActivity.this, "click the item:"+position, Toast.LENGTH_SHORT).show();
+            public void onDelete(int position, View view) {
+                Log.i("TAG", "onDelete: "+position);
+                mSlidesAdapter.deleteItem(position);
+                mRecyclerView.removeView(view);
             }
         });
+
     }
 }

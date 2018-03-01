@@ -3,10 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:layout_marginTop="5dp"
     >
-
-
 
 <LinearLayout
     android:id="@+id/ll_content"
@@ -21,7 +19,7 @@
         android:layout_height="wrap_content"
         android:text="Slides"
         android:layout_margin="10dp"
-        android:textSize="16sp"
+        android:textSize="22sp"
         android:textColor="#FFFFFF"
         />
 
@@ -31,10 +29,11 @@
         android:id="@+id/iv_fun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@mipmap/ic_delete"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:visibility="invisible"
+        android:layout_marginRight="5dp"
         />
 
 </RelativeLayout>

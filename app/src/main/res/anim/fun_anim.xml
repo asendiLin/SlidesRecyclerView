@@ -3,14 +3,9 @@
      android:duration="1000"
     >
 
-    <alpha
-        android:fromAlpha="0.5"
-        android:pivotX="50%"
-        android:pivotY="50%"
-        android:toAlpha="1.0"
-        />
+    <rotate android:pivotY="50%"
+            android:pivotX="50%"
+            android:fromDegrees="0"
+            android:toDegrees="360"/>
 
-    <translate
-        android:fromYDelta="50"
-        android:toYDelta="5"/>
 </set>
